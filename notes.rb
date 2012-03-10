@@ -1,4 +1,7 @@
 #!/usr/bin/env ruby
+
 require 'lib/autoconsulta'
 
-notes = Autoconsulta::Parser.new
+html = File.open 'tmp/ac.html'
+notes_html = Autoconsulta::Parser.new html
+notes_html.parse

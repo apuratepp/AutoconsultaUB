@@ -1,14 +1,4 @@
 require 'rubygems'
 require 'nokogiri'
+require 'lib/autoconsulta/parser'
 
-module Autoconsulta
-  
-  class Parser
-    def initialize
-      puts "hooola"
-    end
-    
-  end
-  
-  
-end

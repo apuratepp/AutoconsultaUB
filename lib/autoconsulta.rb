@@ -1,4 +1,6 @@
 require 'rubygems'
 require 'nokogiri'
+require 'net/http'
+require 'net/https'
 require 'lib/autoconsulta/parser'
-
+require 'lib/autoconsulta/connection'

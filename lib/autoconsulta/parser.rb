@@ -17,10 +17,10 @@ module Autoconsulta
         if index > 0
           notes << Nota.new(
             elements[0].content,
-            elements[1].content,
+            elements[1].content.chop.chop,
             elements[2].content,
             elements[3].content,
-            elements[4].content,
+            elements[4].content.chop.chop,
             elements[5].content,
             elements[6].content,
             elements[7].content,

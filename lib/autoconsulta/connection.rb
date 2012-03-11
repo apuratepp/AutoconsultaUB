@@ -38,6 +38,7 @@ module Autoconsulta
     end
     
     def get_notes
+      self.get_ensenyaments
       http = Net::HTTP.new(URL[:expedient][:host], URL[:expedient][:port])
       headers = { "Cookie" => @cookie }
       resp, data = http.get(URL[:expedient][:path] + "?niub=#{@niub}&danaix=#{@danaix}&idensy=#{@idensy}&PHPSESSID=#{@phpsessid}", headers)

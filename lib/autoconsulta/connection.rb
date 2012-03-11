@@ -41,7 +41,7 @@ module Autoconsulta
       http = Net::HTTP.new(URL[:expedient][:host], URL[:expedient][:port])
       headers = { "Cookie" => @cookie }
       resp, data = http.get(URL[:expedient][:path] + "?niub=#{@niub}&danaix=#{@danaix}&idensy=#{@idensy}&PHPSESSID=#{@phpsessid}", headers)
-      p resp.body
+      # p resp.body
       Autoconsulta::Parser.parse_notes(resp.body)
     end
         

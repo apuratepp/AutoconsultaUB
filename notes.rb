@@ -18,7 +18,5 @@ end
 
 notes = connection.get_notes
 notes.each do |nota|
-  puts nota.curs
-  puts nota.assignatura
-  puts nota.nota
+  puts "#{nota.curs} - #{nota.assignatura}: #{nota.nota} / #{nota.nota2}"
 end

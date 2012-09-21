@@ -8,7 +8,7 @@ config = YAML::load(File.open('config.yml'))
 consulta = Autoconsulta::Connect.new  :niub => config['niub'], 
                                       :danaix => config['danaix'], 
                                       :idensy => config['idensy'], 
-                                      :user => config['user'], 
+                                      :user => config['user'],
                                       :pass => config['pass']
 
 # ensenyaments = consulta.get_ensenyaments

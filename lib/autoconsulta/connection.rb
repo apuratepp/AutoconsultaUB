@@ -24,15 +24,25 @@ module Autoconsulta
       http.use_ssl = true
       resp, data = http.post(URL[:login][:path], "user=#{@user}&password=#{@pass}", {})
       @cookie = resp.response['set-cookie']
-      # p @cookie
-      # puts resp.response.inspect
     end
   
     def get_ensenyaments
       http = Net::HTTP.new(URL[:identificacio][:host], URL[:identificacio][:port])
       headers = { "Cookie" => @cookie }
       resp, data = http.get(URL[:identificacio][:path] + "?niub=#{@niub}&danaix=#{@danaix}", headers)
-      ensenyaments, @phpsessid = Autoconsulta::Parser.parse_ensenyaments(resp.body)
+      if resp.body == ""
+        p resp['location']
+        @phpsessid = resp['location'].split("./expedient.php?PHPSESSID=")[1]
+        # resp, data = http.get(URL[:identificacio][:path] + "?PHPSESSID=" + @phpsessid, {})
+        resp, data = http.get(URL[:identificacio][:path] + "?PHPSESSID=" + @phpsessid, {})
+        p resp['location']
+        http.use_ssl = true
+        resp, data = http.get(resp['location'], headers)
+        p resp.body
+        ensenyaments, @phpsessid = Autoconsulta::Parser.parse_ensenyaments(resp.body)
+      else
+        ensenyaments, @phpsessid = Autoconsulta::Parser.parse_ensenyaments(resp.body)
+      end
       puts "PHPSESSID: " + @phpsessid
       ensenyaments
     end
@@ -42,7 +52,6 @@ module Autoconsulta
       http = Net::HTTP.new(URL[:expedient][:host], URL[:expedient][:port])
       headers = { "Cookie" => @cookie }
       resp, data = http.get(URL[:expedient][:path] + "?niub=#{@niub}&danaix=#{@danaix}&idensy=#{@idensy}&PHPSESSID=#{@phpsessid}", headers)
-      # p resp.body
       Autoconsulta::Parser.parse_notes(resp.body)
     end
         

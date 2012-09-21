@@ -3,6 +3,8 @@ Parsejador de la pàgina de l'expedient de la Universitat de Barcelona
 
 ## Com utilitzar l'script
 
+1. copiar l'arxiu config.default.yml per config.yml amb les dades correctes.
+
 ```ruby
 config = YAML::load(File.open('config.yml'))
 consulta = Autoconsulta::Connect.new  :niub => config['niub'], 
